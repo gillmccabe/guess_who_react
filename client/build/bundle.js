@@ -19901,10 +19901,7 @@
 	      correctAnswer: null,
 	      hughs: [],
 	      questions: questions,
-	      questionAnswer: null,
-	      selectedQuestion: null,
-	      guessId: null,
-	      guessResponse: null
+	      selectedQuestion: null
 	    };
 	  },
 	

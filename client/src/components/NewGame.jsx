@@ -16,10 +16,7 @@ var NewGame = React.createClass({
       correctAnswer: null,
       hughs: [], 
       questions: questions, 
-      questionAnswer: null, 
       selectedQuestion: null,
-      guessId: null,
-      guessResponse: null
     }
   },
 
