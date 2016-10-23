@@ -9,7 +9,7 @@ var QuestionSelector = React.createClass({
     return options;  
   },
 
-  handleQuestionChange: function(event) {
+  handleQuestionChoice: function(event) {
     var newIndex = event.target.value;
     this.props.selectedQuestion(newIndex);
   },
@@ -21,7 +21,7 @@ var QuestionSelector = React.createClass({
     }
     var options = this.generateQuestions();
     return (
-      <select id="questions-dropdown" onChange={this.handleQuestionChange}>
+      <select id="questions-dropdown" onChange={this.handleQuestionChoice}>
         <option selected="true" disabled="disabled">Select Question</option>
         {options}
       </select>

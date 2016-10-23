@@ -19968,7 +19968,7 @@
 	    return options;
 	  },
 	
-	  handleQuestionChange: function handleQuestionChange(event) {
+	  handleQuestionChoice: function handleQuestionChoice(event) {
 	    var newIndex = event.target.value;
 	    this.props.selectedQuestion(newIndex);
 	  },
@@ -19981,7 +19981,7 @@
 	    var options = this.generateQuestions();
 	    return React.createElement(
 	      "select",
-	      { id: "questions-dropdown", onChange: this.handleQuestionChange },
+	      { id: "questions-dropdown", onChange: this.handleQuestionChoice },
 	      React.createElement(
 	        "option",
 	        { selected: "true", disabled: "disabled" },
