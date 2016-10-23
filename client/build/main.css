@@ -1,5 +1,5 @@
 body {
-  background-color: #ffffff;
+  background-color: #808080;
 }
 
 img {
@@ -17,14 +17,16 @@ img:hover{
 
 #main {
   background-color: #94C2D1;
-  width:95%;
+  width:92%;
   height:100%;
   margin: auto;
-  margin-top: 4%;
+  margin-top: 3%;
   border: solid #000000;
+  box-shadow:inset 0px 0px 0px 5px #ffffff ;
+
   border-width: 5px;
   border-radius: 15px;
-  padding:1%;
+  padding:2%;
 }
 
 

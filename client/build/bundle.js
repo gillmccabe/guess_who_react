@@ -19838,7 +19838,6 @@
 	
 	    return {
 	      correctHugh: null,
-	      hughs: [],
 	      questions: questions,
 	      selectedQuestion: null,
 	      questionAnswer: null,
@@ -19849,7 +19848,7 @@
 	
 	  componentDidUpdate: function componentDidUpdate() {
 	    if (this.state.correctHugh === null) {
-	      var randomHugh = this.state.hughs[Math.floor(Math.random() * this.state.hughs.length)];
+	      var randomHugh = this.props.hughs[Math.floor(Math.random() * this.props.hughs.length)];
 	      this.setState({ correctHugh: randomHugh });
 	    }
 	  },
@@ -19862,12 +19861,12 @@
 	    }.bind(this));
 	  },
 	
-	  checkGuess: function checkGuess(guessId) {
+	  checkGuessIsCorrect: function checkGuessIsCorrect(guessId) {
 	    this.setState({ guessId: guessId }, function respondToGuess() {
-	      if (guessId == this.state.correctHugh.id) {
+	      if (guessId === this.state.correctHugh.id) {
 	        this.setState({ guessAnswer: "That's the correct answer. Well Done!" });
 	      } else {
-	        this.setState({ guessAnswer: "Oops - wrong answer! Try Again!" });
+	        this.setState({ guessAnswer: "Oops wrong answer! Try Again..." });
 	      }
 	    }.bind(this));
 	  },
@@ -19892,7 +19891,7 @@
 	            { id: 'question-title' },
 	            'Ask A Question'
 	          ),
-	          React.createElement(QuestionSelector, { hughs: this.state.hughs, questions: this.state.questions, defaultValue: this.setSelectedQuestion }),
+	          React.createElement(QuestionSelector, { hughs: this.props.hughs, questions: this.state.questions, defaultValue: this.setSelectedQuestion }),
 	          React.createElement(QuestionAnswer, { answer: this.state.questionAnswer })
 	        ),
 	        React.createElement(
@@ -19903,7 +19902,7 @@
 	            { id: 'guess-title' },
 	            'Take A Guess'
 	          ),
-	          React.createElement(GuessSelector, { hughs: this.state.hughs, makeGuess: this.checkGuess }),
+	          React.createElement(GuessSelector, { hughs: this.props.hughs, makeGuess: this.checkGuessIsCorrect }),
 	          React.createElement(GuessAnswer, { response: this.state.guessAnswer })
 	        )
 	      )

@@ -18,7 +18,6 @@ var NewGame = React.createClass({
 
     return { 
       correctHugh: null,
-      hughs: [], 
       questions: questions, 
       selectedQuestion: null,
       questionAnswer: null,
@@ -29,7 +28,7 @@ var NewGame = React.createClass({
 
   componentDidUpdate: function() {
     if (this.state.correctHugh === null) {
-    const randomHugh = this.state.hughs[Math.floor(Math.random() * this.state.hughs.length)];
+    const randomHugh = this.props.hughs[Math.floor(Math.random() * this.props.hughs.length)];
     this.setState({correctHugh: randomHugh})
     }
   },
@@ -42,35 +41,35 @@ var NewGame = React.createClass({
       }.bind(this)); 
   },
 
-  checkGuess: function(guessId) {
+  checkGuessIsCorrect: function(guessId) {
     this.setState({guessId: guessId}, function respondToGuess(){
-      if (guessId == this.state.correctHugh.id) {
+      if (guessId === this.state.correctHugh.id) {
         this.setState({guessAnswer: "That's the correct answer. Well Done!"})
       } else {
-        this.setState({guessAnswer: "Oops - wrong answer! Try Again!"})
+        this.setState({guessAnswer: "Oops wrong answer! Try Again..."})
       }
     }.bind(this));
   },
 
   render: function(){
     return(
-    <div>  
-      <div className='images'>
-        <HughList hughs={this.props.hughs}></HughList>
-      </div>
-      <div className='all-dropdown-info'>
-        <div className="questions-div">
-          <h2 id='question-title'>Ask A Question</h2>
-          <QuestionSelector hughs={this.state.hughs} questions={this.state.questions} defaultValue={this.setSelectedQuestion}/>
-          <QuestionAnswer answer={this.state.questionAnswer}/>
+      <div>  
+        <div className='images'>
+          <HughList hughs={this.props.hughs}></HughList>
         </div>
-        <div className="guess-div">
-          <h2 id='guess-title'>Take A Guess</h2>
-          <GuessSelector hughs={this.state.hughs} makeGuess={this.checkGuess} />
-          <GuessAnswer response={this.state.guessAnswer}/>
+        <div className='all-dropdown-info'>
+          <div className="questions-div">
+            <h2 id='question-title'>Ask A Question</h2>
+            <QuestionSelector hughs={this.props.hughs} questions={this.state.questions} defaultValue={this.setSelectedQuestion}/>
+            <QuestionAnswer answer={this.state.questionAnswer}/>
+          </div>
+          <div className="guess-div">
+            <h2 id='guess-title'>Take A Guess</h2>
+            <GuessSelector hughs={this.props.hughs} makeGuess={this.checkGuessIsCorrect} />
+            <GuessAnswer response={this.state.guessAnswer}/>
+          </div>
         </div>
       </div>
-    </div>
     )
   }
 
