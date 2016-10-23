@@ -10,7 +10,7 @@ var Hugh = React.createClass({
 
   handleClick: function(){
     var setSelected = !this.state.selected;
-    this.setState({selected: setSelected});
+    this.setState({selected: true});
   },
 
   render: function(){

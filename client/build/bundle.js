@@ -19934,7 +19934,7 @@
 	
 	  handleClick: function handleClick() {
 	    var setSelected = !this.state.selected;
-	    this.setState({ selected: setSelected });
+	    this.setState({ selected: true });
 	  },
 	
 	  render: function render() {
