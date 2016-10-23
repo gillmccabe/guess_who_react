@@ -2,7 +2,7 @@ var React = require('react');
 
 var QuestionSelector = React.createClass({
 
-  generateQuestions: function() {
+  generateQuestionsDropdown: function() {
     var options = this.props.questions.map(function(question, index){
       return <option key={index} value={index}>{question}</option>
     });
@@ -10,16 +10,12 @@ var QuestionSelector = React.createClass({
   },
 
   handleQuestionChoice: function(event) {
-    var newIndex = event.target.value;
-    this.props.selectedQuestion(newIndex);
+    var index = event.target.value;
+    this.props.hughs[index];
   },
 
   render: function(){
-
-    if(!this.props.questions){
-      return;
-    }
-    var options = this.generateQuestions();
+    var options = this.generateQuestionsDropdown();
     return (
       <select id="questions-dropdown" onChange={this.handleQuestionChoice}>
         <option selected="true" disabled="disabled">Select Question</option>

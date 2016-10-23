@@ -22,9 +22,9 @@ var Main = React.createClass({
 
   render: function(){
     return(
-      <div>
-      <GameHeader />
-      <NewGame hughs={this.state.hughs}/>
+      <div id="main">
+        <GameHeader />
+        <NewGame hughs={this.state.hughs}/>
       </div>
     )
   }

@@ -1,0 +1,86 @@
+body {
+  background-color: #ffffff;
+}
+
+img {
+  width: 180px;
+  height: 230px;
+  margin:2%;
+  border:solid black;
+  border-width: 4px;
+  border-radius: 8px;
+}
+
+img:hover{
+  box-shadow: inset 0px 0px 0px 5px black ;
+}
+
+#main {
+  background-color: #94C2D1;
+  width:95%;
+  height:100%;
+  margin: auto;
+  margin-top: 4%;
+  border: solid #000000;
+  border-width: 5px;
+  border-radius: 15px;
+  padding:1%;
+}
+
+
+#image-list {
+  width: 60%;
+  height: 100%;
+  text-align:center;
+  margin: auto 0;
+}
+
+.game-header {
+  color: #A52A2A;
+  font-family: 'Luckiest Guy', cursive;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  font-weight: bolder;
+  font-size: 90px;
+  text-align: center;
+  margin-top:2%;
+  margin-bottom: 1%;
+}
+
+#question-title, #guess-title {
+  color: #ffffff;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 25px;
+  margin-bottom: 1%;
+}
+
+.questions-div, .guess-div {
+  padding-top: 3%;
+  width: 30%;
+  margin: auto 0;
+  float: right;
+  position: absolute;
+  z-index: 99;
+}
+
+.questions-div {
+  left: 63%;
+  top: 24%;
+}
+
+.guess-div {
+  left: 63%;
+  top: 38%;
+}
+
+
+select{
+  height: 35px;
+  width: 360px;
+  padding:10px;
+  border: 3px solid #000000;
+  border-radius: 2px;
+
+}

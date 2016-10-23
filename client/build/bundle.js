@@ -19781,7 +19781,7 @@
 	  render: function render() {
 	    return React.createElement(
 	      'div',
-	      null,
+	      { id: 'main' },
 	      React.createElement(GameHeader, null),
 	      React.createElement(NewGame, { hughs: this.state.hughs })
 	    );
@@ -19795,19 +19795,19 @@
 /* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	var React = __webpack_require__(1);
 	
 	var GameHeader = React.createClass({
-	  displayName: 'GameHeader',
+	  displayName: "GameHeader",
 	
 	
 	  render: function render() {
 	    return React.createElement(
-	      'div',
-	      null,
-	      'GUESS HUGH!'
+	      "div",
+	      { className: "game-header" },
+	      "Guess Hugh!"
 	    );
 	  }
 	
@@ -19825,6 +19825,8 @@
 	var HughList = __webpack_require__(162);
 	var QuestionSelector = __webpack_require__(164);
 	var QuestionAnswer = __webpack_require__(165);
+	var GuessSelector = __webpack_require__(166);
+	var GuessAnswer = __webpack_require__(167);
 	
 	var NewGame = React.createClass({
 	  displayName: 'NewGame',
@@ -19839,7 +19841,9 @@
 	      hughs: [],
 	      questions: questions,
 	      selectedQuestion: null,
-	      questionAnswer: null
+	      questionAnswer: null,
+	      guessAnswer: null,
+	      guessId: null
 	    };
 	  },
 	
@@ -19858,21 +19862,50 @@
 	    }.bind(this));
 	  },
 	
+	  checkGuess: function checkGuess(guessId) {
+	    this.setState({ guessId: guessId }, function respondToGuess() {
+	      if (guessId == this.state.correctHugh.id) {
+	        this.setState({ guessAnswer: "That's the correct answer. Well Done!" });
+	      } else {
+	        this.setState({ guessAnswer: "Oops - wrong answer! Try Again!" });
+	      }
+	    }.bind(this));
+	  },
+	
 	  render: function render() {
 	    return React.createElement(
 	      'div',
 	      null,
-	      React.createElement(HughList, { hughs: this.props.hughs }),
 	      React.createElement(
 	        'div',
-	        { className: 'questions' },
+	        { className: 'images' },
+	        React.createElement(HughList, { hughs: this.props.hughs })
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'all-dropdown-info' },
 	        React.createElement(
-	          'h2',
-	          null,
-	          'Ask A Question'
+	          'div',
+	          { className: 'questions-div' },
+	          React.createElement(
+	            'h2',
+	            { id: 'question-title' },
+	            'Ask A Question'
+	          ),
+	          React.createElement(QuestionSelector, { hughs: this.state.hughs, questions: this.state.questions, defaultValue: this.setSelectedQuestion }),
+	          React.createElement(QuestionAnswer, { answer: this.state.questionAnswer })
 	        ),
-	        React.createElement(QuestionSelector, { hughs: this.state.hughs, questions: this.state.questions, selectedQuestion: this.setSelectedQuestion }),
-	        React.createElement(QuestionAnswer, { answer: this.state.questionAnswer })
+	        React.createElement(
+	          'div',
+	          { className: 'guess-div' },
+	          React.createElement(
+	            'h2',
+	            { id: 'guess-title' },
+	            'Take A Guess'
+	          ),
+	          React.createElement(GuessSelector, { hughs: this.state.hughs, makeGuess: this.checkGuess }),
+	          React.createElement(GuessAnswer, { response: this.state.guessAnswer })
+	        )
 	      )
 	    );
 	  }
@@ -19905,7 +19938,7 @@
 	    var hughList = this.createList();
 	    return React.createElement(
 	      'div',
-	      null,
+	      { id: 'image-list' },
 	      hughList
 	    );
 	  }
@@ -19957,7 +19990,7 @@
 	  displayName: "QuestionSelector",
 	
 	
-	  generateQuestions: function generateQuestions() {
+	  generateQuestionsDropdown: function generateQuestionsDropdown() {
 	    var options = this.props.questions.map(function (question, index) {
 	      return React.createElement(
 	        "option",
@@ -19969,16 +20002,12 @@
 	  },
 	
 	  handleQuestionChoice: function handleQuestionChoice(event) {
-	    var newIndex = event.target.value;
-	    this.props.selectedQuestion(newIndex);
+	    var index = event.target.value;
+	    this.props.hughs[index];
 	  },
 	
 	  render: function render() {
-	
-	    if (!this.props.questions) {
-	      return;
-	    }
-	    var options = this.generateQuestions();
+	    var options = this.generateQuestionsDropdown();
 	    return React.createElement(
 	      "select",
 	      { id: "questions-dropdown", onChange: this.handleQuestionChoice },
@@ -20015,6 +20044,73 @@
 	  );
 	};
 	module.exports = QuestionAnswer;
+
+/***/ },
+/* 166 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(1);
+	
+	var GuessSelector = React.createClass({
+	  displayName: "GuessSelector",
+	
+	
+	  generateGuessDropdown: function generateGuessDropdown() {
+	    var options = this.props.hughs.map(function (hugh, index) {
+	      return React.createElement(
+	        "option",
+	        { key: index, value: hugh.id },
+	        hugh.name
+	      );
+	    });
+	    return options;
+	  },
+	
+	  handleGuess: function handleGuess(event, index) {
+	    var id = event.target.value;
+	    this.props.makeGuess(id);
+	  },
+	
+	  render: function render() {
+	    var options = this.generateGuessDropdown();
+	    return React.createElement(
+	      "select",
+	      { id: "guess-dropdown", onChange: this.handleGuess },
+	      React.createElement(
+	        "option",
+	        { selected: "true", disabled: "disabled" },
+	        "Choose a Hugh"
+	      ),
+	      options
+	    );
+	  }
+	
+	});
+	
+	module.exports = GuessSelector;
+
+/***/ },
+/* 167 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	
+	var GuessAnswer = function GuessAnswer(props) {
+	
+	  if (props.response === null) {
+	    return React.createElement('p', null);
+	  };
+	  return React.createElement(
+	    'p',
+	    null,
+	    props.response
+	  );
+	};
+	module.exports = GuessAnswer;
 
 /***/ }
 /******/ ]);

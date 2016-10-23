@@ -2,6 +2,8 @@ var React = require('react');
 var HughList = require('./HughList');
 var QuestionSelector = require('./QuestionSelector');
 var QuestionAnswer = require('./QuestionAnswer');
+var GuessSelector = require('./GuessSelector');
+var GuessAnswer = require('./GuessAnswer');
 
 var NewGame = React.createClass({
 
@@ -20,6 +22,8 @@ var NewGame = React.createClass({
       questions: questions, 
       selectedQuestion: null,
       questionAnswer: null,
+      guessAnswer: null,
+      guessId: null
     }
   },
 
@@ -38,14 +42,33 @@ var NewGame = React.createClass({
       }.bind(this)); 
   },
 
+  checkGuess: function(guessId) {
+    this.setState({guessId: guessId}, function respondToGuess(){
+      if (guessId == this.state.correctHugh.id) {
+        this.setState({guessAnswer: "That's the correct answer. Well Done!"})
+      } else {
+        this.setState({guessAnswer: "Oops - wrong answer! Try Again!"})
+      }
+    }.bind(this));
+  },
+
   render: function(){
     return(
     <div>  
-      <HughList hughs={this.props.hughs}></HughList>
-      <div className="questions">
-        <h2>Ask A Question</h2>
-        <QuestionSelector hughs={this.state.hughs} questions={this.state.questions} selectedQuestion={this.setSelectedQuestion}/>
-        <QuestionAnswer answer={this.state.questionAnswer}/>
+      <div className='images'>
+        <HughList hughs={this.props.hughs}></HughList>
+      </div>
+      <div className='all-dropdown-info'>
+        <div className="questions-div">
+          <h2 id='question-title'>Ask A Question</h2>
+          <QuestionSelector hughs={this.state.hughs} questions={this.state.questions} defaultValue={this.setSelectedQuestion}/>
+          <QuestionAnswer answer={this.state.questionAnswer}/>
+        </div>
+        <div className="guess-div">
+          <h2 id='guess-title'>Take A Guess</h2>
+          <GuessSelector hughs={this.state.hughs} makeGuess={this.checkGuess} />
+          <GuessAnswer response={this.state.guessAnswer}/>
+        </div>
       </div>
     </div>
     )

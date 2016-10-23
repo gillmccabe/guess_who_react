@@ -4,7 +4,7 @@ var GameHeader = React.createClass({
 
   render: function(){
     return(
-      <div>GUESS HUGH!</div>
+      <div className="game-header">Guess Hugh!</div>
     )
   }
 

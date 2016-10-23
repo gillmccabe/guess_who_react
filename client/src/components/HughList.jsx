@@ -13,7 +13,7 @@ var HughList = React.createClass({
   render: function(){
     var hughList = this.createList();
     return (
-        <div>{hughList}</div>
+        <div id='image-list'>{hughList}</div>
       )
   }
 
