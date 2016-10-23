@@ -48,7 +48,7 @@
 	
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(158);
-	var Main = __webpack_require__(162);
+	var Main = __webpack_require__(159);
 	
 	window.onload = function () {
 	  ReactDOM.render(React.createElement(Main, null), document.getElementById('app'));
@@ -19749,79 +19749,14 @@
 
 
 /***/ },
-/* 159 */,
-/* 160 */
+/* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var React = __webpack_require__(1);
-	var Hugh = __webpack_require__(161);
-	
-	var HughList = React.createClass({
-	  displayName: 'HughList',
-	
-	
-	  createList: function createList() {
-	    var hughList = this.props.hughs.map(function (hugh, index) {
-	      return React.createElement(Hugh, { image: hugh.image, key: index });
-	    });
-	    return hughList;
-	  },
-	
-	  render: function render() {
-	    var hughList = this.createList();
-	    return React.createElement(
-	      'div',
-	      null,
-	      hughList
-	    );
-	  }
-	
-	});
-	
-	module.exports = HughList;
-
-/***/ },
-/* 161 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var React = __webpack_require__(1);
-	
-	var Hugh = React.createClass({
-	  displayName: 'Hugh',
-	
-	
-	  getInitialState: function getInitialState() {
-	    return {
-	      selected: false
-	    };
-	  },
-	
-	  handleClick: function handleClick() {
-	    var setSelected = !this.state.selected;
-	    this.setState({ selected: setSelected });
-	  },
-	
-	  render: function render() {
-	    return React.createElement('img', { src: this.props.image, onClick: this.handleClick });
-	  }
-	
-	});
-	
-	module.exports = Hugh;
-
-/***/ },
-/* 162 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var React = __webpack_require__(1);
-	var GameHeader = __webpack_require__(163);
-	var NewGame = __webpack_require__(164);
+	var GameHeader = __webpack_require__(160);
+	var NewGame = __webpack_require__(161);
 	
 	var Main = React.createClass({
 	  displayName: 'Main',
@@ -19857,7 +19792,7 @@
 	module.exports = Main;
 
 /***/ },
-/* 163 */
+/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19881,13 +19816,15 @@
 	module.exports = GameHeader;
 
 /***/ },
-/* 164 */
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var React = __webpack_require__(1);
-	var HughList = __webpack_require__(160);
+	var HughList = __webpack_require__(162);
+	var QuestionSelector = __webpack_require__(164);
+	var QuestionAnswer = __webpack_require__(165);
 	
 	var NewGame = React.createClass({
 	  displayName: 'NewGame',
@@ -19898,27 +19835,186 @@
 	    var questions = ["Is he wearing glasses?", "Does he have dark hair?", "Is he wearing a hat?", "Does he have facial hair?"];
 	
 	    return {
-	      correctAnswer: null,
+	      correctHugh: null,
 	      hughs: [],
 	      questions: questions,
-	      selectedQuestion: null
+	      selectedQuestion: null,
+	      questionAnswer: null
 	    };
 	  },
 	
 	  componentDidUpdate: function componentDidUpdate() {
-	    if (this.state.correctAnswer === null) {
+	    if (this.state.correctHugh === null) {
 	      var randomHugh = this.state.hughs[Math.floor(Math.random() * this.state.hughs.length)];
-	      this.setState({ correctAnswer: randomHugh });
+	      this.setState({ correctHugh: randomHugh });
 	    }
 	  },
 	
+	  setSelectedQuestion: function setSelectedQuestion(index) {
+	    this.setState({ selectedClue: index }, function respondToQuestion() {
+	      var index = this.state.selectedQuestion;
+	      var response = this.state.correctHugh.clue[index];
+	      this.setState({ questionAnswer: response });
+	    }.bind(this));
+	  },
+	
 	  render: function render() {
-	    return React.createElement(HughList, { hughs: this.props.hughs });
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(HughList, { hughs: this.props.hughs }),
+	      React.createElement(
+	        'div',
+	        { className: 'questions' },
+	        React.createElement(
+	          'h2',
+	          null,
+	          'Ask A Question'
+	        ),
+	        React.createElement(QuestionSelector, { hughs: this.state.hughs, questions: this.state.questions, selectedQuestion: this.setSelectedQuestion }),
+	        React.createElement(QuestionAnswer, { answer: this.state.questionAnswer })
+	      )
+	    );
 	  }
 	
 	});
 	
 	module.exports = NewGame;
+
+/***/ },
+/* 162 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	var Hugh = __webpack_require__(163);
+	
+	var HughList = React.createClass({
+	  displayName: 'HughList',
+	
+	
+	  createList: function createList() {
+	    var hughList = this.props.hughs.map(function (hugh, index) {
+	      return React.createElement(Hugh, { image: hugh.image, key: index });
+	    });
+	    return hughList;
+	  },
+	
+	  render: function render() {
+	    var hughList = this.createList();
+	    return React.createElement(
+	      'div',
+	      null,
+	      hughList
+	    );
+	  }
+	
+	});
+	
+	module.exports = HughList;
+
+/***/ },
+/* 163 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	
+	var Hugh = React.createClass({
+	  displayName: 'Hugh',
+	
+	
+	  getInitialState: function getInitialState() {
+	    return {
+	      selected: false
+	    };
+	  },
+	
+	  handleClick: function handleClick() {
+	    var setSelected = !this.state.selected;
+	    this.setState({ selected: setSelected });
+	  },
+	
+	  render: function render() {
+	    return React.createElement('img', { src: this.props.image, onClick: this.handleClick });
+	  }
+	
+	});
+	
+	module.exports = Hugh;
+
+/***/ },
+/* 164 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(1);
+	
+	var QuestionSelector = React.createClass({
+	  displayName: "QuestionSelector",
+	
+	
+	  generateQuestions: function generateQuestions() {
+	    var options = this.props.questions.map(function (question, index) {
+	      return React.createElement(
+	        "option",
+	        { key: index, value: index },
+	        question
+	      );
+	    });
+	    return options;
+	  },
+	
+	  handleQuestionChange: function handleQuestionChange(event) {
+	    var newIndex = event.target.value;
+	    this.props.selectedQuestion(newIndex);
+	  },
+	
+	  render: function render() {
+	
+	    if (!this.props.questions) {
+	      return;
+	    }
+	    var options = this.generateQuestions();
+	    return React.createElement(
+	      "select",
+	      { id: "questions-dropdown", onChange: this.handleQuestionChange },
+	      React.createElement(
+	        "option",
+	        { selected: "true", disabled: "disabled" },
+	        "Select Question"
+	      ),
+	      options
+	    );
+	  }
+	
+	});
+	
+	module.exports = QuestionSelector;
+
+/***/ },
+/* 165 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	
+	var QuestionAnswer = function QuestionAnswer(props) {
+	
+	  if (props.answer === null) {
+	    return React.createElement('p', null);
+	  };
+	  return React.createElement(
+	    'p',
+	    null,
+	    props.answer
+	  );
+	};
+	module.exports = QuestionAnswer;
 
 /***/ }
 /******/ ]);
