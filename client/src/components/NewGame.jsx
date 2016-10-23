@@ -33,7 +33,7 @@ var NewGame = React.createClass({
   setSelectedQuestion: function(index) {
       this.setState({ selectedClue: index }, function respondToQuestion() {        
         var index = this.state.selectedQuestion;
-        var response = this.state.correctHugh.clue[index];
+        var response = this.state.questions[index];
         this.setState({questionAnswer: response});    
       }.bind(this)); 
   },
