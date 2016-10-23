@@ -1,9 +1,13 @@
 var React = require('react');
+var HughList = require('./HughList.jsx');
 
 var GameBox = React.createClass({
 
   getInitialState: function(){
+    return { 
     hughs: []
+    }
+
   },
 
   componentDidMount: function() {

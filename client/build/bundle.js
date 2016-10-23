@@ -48,13 +48,10 @@
 	
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(158);
+	var GameBox = __webpack_require__(159);
 	
 	window.onload = function () {
-	  ReactDOM.render(React.createElement(
-	    'h1',
-	    null,
-	    ' App Started '
-	  ), document.getElementById('app'));
+	  ReactDOM.render(React.createElement(GameBox, null), document.getElementById('app'));
 	};
 
 /***/ },
@@ -19750,6 +19747,73 @@
 	
 	module.exports = __webpack_require__(3);
 
+
+/***/ },
+/* 159 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	var HughList = __webpack_require__(160);
+	
+	var GameBox = React.createClass({
+	  displayName: 'GameBox',
+	
+	
+	  getInitialState: function getInitialState() {
+	    return {
+	      hughs: []
+	    };
+	  },
+	
+	  componentDidMount: function componentDidMount() {
+	    var url = "api/hughs";
+	    var request = new XMLHttpRequest();
+	    request.open('GET', url);
+	    request.onload = function () {
+	      console.log(request.responseText);
+	      var data = JSON.parse(request.responseText);
+	      this.setState({ hughs: data });
+	    }.bind(this);
+	    request.send();
+	  },
+	
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h1',
+	        null,
+	        'Guess Hugh'
+	      ),
+	      React.createElement(HughList, { hughs: this.state.hughs })
+	    );
+	  }
+	
+	});
+	
+	module.exports = GameBox;
+
+/***/ },
+/* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	
+	var HughList = function HughList(props) {
+	
+	  var hughList = props.hughs.map(function (hugh, index) {
+	    return React.createElement('li', { key: index });
+	  });
+	
+	  return React.createElement('div', { className: 'hugh-list' });
+	};
+	
+	module.exports = HughList;
 
 /***/ }
 /******/ ]);

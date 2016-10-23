@@ -2,22 +2,22 @@
 
   {
     "name": "Hugh Grant",
-    "src": "./images/hugh_grant.jpg",
+    "src": "./images/hugh_grant.jpg"
   },  
 
   {
     "name": "Hugh Lawrie",
-    "src": "./images/hugh_lawrie.jpg",
+    "src": "./images/hugh_lawrie.jpg"
   },  
 
   {
     "name": "Hugh Hefner",
-    "src": "./images/hugh_hefner",
+    "src": "./images/hugh_hefner.jpg"
   },  
 
   {
     "name": "Hugh Jackman",
-    "src": "./images/hugh_jackman.jpg",
+    "src": "./images/hugh_jackman.jpg"
   }
 
 ]
