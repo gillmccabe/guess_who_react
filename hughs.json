@@ -2,22 +2,38 @@
 
   {
     "name": "Hugh Grant",
-    "img": "./images/hugh_grant.jpg"
+    "image": "./images/hugh_grant.jpg",
+    "facialHair": false,
+    "glasses": true,
+    "hairColour": "brown",
+    "hat": false
   },  
 
   {
     "name": "Hugh Lawrie",
-    "img": "./images/hugh_lawrie.jpg"
+    "image": "./images/hugh_lawrie.jpg",
+    "facialHair": true,
+    "glasses": true,
+    "hairColour": "blonde",
+    "hat": false
   },  
 
   {
     "name": "Hugh Hefner",
-    "img": "./images/hugh_hefner.jpg"
+    "image": "./images/hugh_hefner.jpg",
+    "facialHair": false,
+    "glasses": false,
+    "hairColour": "blonde",
+    "hat": true
   },  
 
   {
     "name": "Hugh Jackman",
-    "img": "./images/hugh_jackman.jpg"
+    "image": "./images/hugh_jackman.jpg",
+    "facialHair": true,
+    "glasses": true,
+    "hairColour": "brown",
+    "hat": true
   }
 
 ]

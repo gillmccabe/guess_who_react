@@ -48,10 +48,10 @@
 	
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(158);
-	var GameBox = __webpack_require__(159);
+	var Main = __webpack_require__(162);
 	
 	window.onload = function () {
-	  ReactDOM.render(React.createElement(GameBox, null), document.getElementById('app'));
+	  ReactDOM.render(React.createElement(Main, null), document.getElementById('app'));
 	};
 
 /***/ },
@@ -19749,22 +19749,86 @@
 
 
 /***/ },
-/* 159 */
+/* 159 */,
+/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var React = __webpack_require__(1);
-	var HughList = __webpack_require__(160);
+	var Hugh = __webpack_require__(161);
 	
-	var GameBox = React.createClass({
-	  displayName: 'GameBox',
+	var HughList = React.createClass({
+	  displayName: 'HughList',
+	
+	
+	  createList: function createList() {
+	    var hughList = this.props.hughs.map(function (hugh, index) {
+	      return React.createElement(Hugh, { image: hugh.image, key: index });
+	    });
+	    return hughList;
+	  },
+	
+	  render: function render() {
+	    var hughList = this.createList();
+	    return React.createElement(
+	      'div',
+	      null,
+	      hughList
+	    );
+	  }
+	
+	});
+	
+	module.exports = HughList;
+
+/***/ },
+/* 161 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	
+	var Hugh = React.createClass({
+	  displayName: 'Hugh',
 	
 	
 	  getInitialState: function getInitialState() {
 	    return {
-	      hughs: []
+	      selected: false
 	    };
+	  },
+	
+	  handleClick: function handleClick() {
+	    var setSelected = !this.state.selected;
+	    this.setState({ selected: setSelected });
+	  },
+	
+	  render: function render() {
+	    return React.createElement('img', { src: this.props.image, onClick: this.handleClick });
+	  }
+	
+	});
+	
+	module.exports = Hugh;
+
+/***/ },
+/* 162 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	var GameHeader = __webpack_require__(163);
+	var NewGame = __webpack_require__(164);
+	
+	var Main = React.createClass({
+	  displayName: 'Main',
+	
+	
+	  getInitialState: function getInitialState() {
+	    return { hughs: [] };
 	  },
 	
 	  componentDidMount: function componentDidMount() {
@@ -19783,81 +19847,81 @@
 	    return React.createElement(
 	      'div',
 	      null,
-	      React.createElement(
-	        'h1',
-	        null,
-	        'Guess Hugh'
-	      ),
-	      React.createElement(HughList, { hughs: this.state.hughs })
+	      React.createElement(GameHeader, null),
+	      React.createElement(NewGame, { hughs: this.state.hughs })
 	    );
 	  }
 	
 	});
 	
-	module.exports = GameBox;
+	module.exports = Main;
 
 /***/ },
-/* 160 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var React = __webpack_require__(1);
-	var Hugh = __webpack_require__(161);
-	
-	var HughList = function HughList(props) {
-	
-	  var hughList = props.hughs.map(function (hugh, index) {
-	    return React.createElement(
-	      'li',
-	      { key: index },
-	      React.createElement(Hugh, { img: hugh.img })
-	    );
-	  });
-	
-	  return React.createElement(
-	    'div',
-	    { className: 'hugh-list' },
-	    hughList
-	  );
-	};
-	
-	module.exports = HughList;
-
-/***/ },
-/* 161 */
+/* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var React = __webpack_require__(1);
 	
-	var Hugh = React.createClass({
-	  displayName: 'Hugh',
+	var GameHeader = React.createClass({
+	  displayName: 'GameHeader',
 	
-	
-	  getInitialState: function getInitialState() {
-	    return {
-	      picked: false
-	    };
-	  },
-	
-	  handleClick: function handleClick() {
-	    var setPicked = !this.state.picked;
-	    this.setState({ picked: setPicked });
-	  },
 	
 	  render: function render() {
 	    return React.createElement(
 	      'div',
 	      null,
-	      React.createElement('img', { img: this.props.img, onClick: this.handleClick })
+	      'GUESS HUGH!'
 	    );
 	  }
 	
 	});
 	
-	module.exports = Hugh;
+	module.exports = GameHeader;
+
+/***/ },
+/* 164 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	var HughList = __webpack_require__(160);
+	
+	var NewGame = React.createClass({
+	  displayName: 'NewGame',
+	
+	
+	  getInitialState: function getInitialState() {
+	
+	    var questions = ["Is he wearing glasses?", "Does he have dark hair?", "Is he wearing a hat?", "Does he have facial hair?"];
+	
+	    return {
+	      correctAnswer: null,
+	      hughs: [],
+	      questions: questions,
+	      questionAnswer: null,
+	      selectedQuestion: null,
+	      guessId: null,
+	      guessResponse: null
+	    };
+	  },
+	
+	  componentDidUpdate: function componentDidUpdate() {
+	    if (this.state.correctAnswer === null) {
+	      var randomHugh = this.state.hughs[Math.floor(Math.random() * this.state.hughs.length)];
+	      this.setState({ correctAnswer: randomHugh });
+	    }
+	  },
+	
+	  render: function render() {
+	    return React.createElement(HughList, { hughs: this.props.hughs });
+	  }
+	
+	});
+	
+	module.exports = NewGame;
 
 /***/ }
 /******/ ]);

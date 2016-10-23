@@ -1,22 +1,23 @@
 var React = require('react');
-var Hugh = require('./Hugh.jsx');
+var Hugh = require('./Hugh');
 
-var HughList = function( props ) {
-  
-  var hughList = props.hughs.map(function(hugh, index) {
+var HughList = React.createClass({
+
+  createList: function(){
+    var hughList = this.props.hughs.map(function(hugh, index){
+      return <Hugh image={hugh.image} key={index}/>
+    })
+    return hughList;
+  },
+
+  render: function(){
+    var hughList = this.createList();
     return (
-      <li key={index}>
-        <Hugh img={hugh.img} />
-      </li>
-    )
-  })
+        <div>{hughList}</div>
+      )
+  }
 
-  return(
-    <div className='hugh-list'>
-      {hughList}
-    </div>
-  )
+})
 
-}
 
-module.exports = HughList;
+module.exports = HughList

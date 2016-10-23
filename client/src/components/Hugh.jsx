@@ -2,25 +2,22 @@ var React = require('react');
 
 var Hugh = React.createClass({
 
-  getInitialState: function() {
-    return { 
-      picked: false 
+  getInitialState: function(){
+    return {
+      selected: false
     }
   },
 
-  handleClick: function() {
-    var setPicked = !this.state.picked;
-    this.setState({picked: setPicked});
+  handleClick: function(){
+    var setSelected = !this.state.selected;
+    this.setState({selected: setSelected});
   },
 
   render: function(){
-    return(
-      <div>
-        <img img={this.props.img} onClick = {this.handleClick}></img>
-      </div>
-    )
-  }
-
+    return (
+     <img src={this.props.image} onClick = {this.handleClick}></img>
+  )
+}
 
 })
 
