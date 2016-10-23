@@ -19803,17 +19803,61 @@
 	'use strict';
 	
 	var React = __webpack_require__(1);
+	var Hugh = __webpack_require__(161);
 	
 	var HughList = function HughList(props) {
 	
 	  var hughList = props.hughs.map(function (hugh, index) {
-	    return React.createElement('li', { key: index });
+	    return React.createElement(
+	      'li',
+	      { key: index },
+	      React.createElement(Hugh, { img: hugh.img })
+	    );
 	  });
 	
-	  return React.createElement('div', { className: 'hugh-list' });
+	  return React.createElement(
+	    'div',
+	    { className: 'hugh-list' },
+	    hughList
+	  );
 	};
 	
 	module.exports = HughList;
+
+/***/ },
+/* 161 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	
+	var Hugh = React.createClass({
+	  displayName: 'Hugh',
+	
+	
+	  getInitialState: function getInitialState() {
+	    return {
+	      picked: false
+	    };
+	  },
+	
+	  handleClick: function handleClick() {
+	    var setPicked = !this.state.picked;
+	    this.setState({ picked: setPicked });
+	  },
+	
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement('img', { img: this.props.img, onClick: this.handleClick })
+	    );
+	  }
+	
+	});
+	
+	module.exports = Hugh;
 
 /***/ }
 /******/ ]);
