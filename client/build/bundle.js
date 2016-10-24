@@ -20088,22 +20088,16 @@
 /* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var React = __webpack_require__(1);
 	
 	var QuestionAnswer = function QuestionAnswer(props) {
 	
-	  if (props.answer === null) {
-	    return React.createElement("p", null);
-	  };
-	
-	  var setResponse = props.answer ? "Yes" : "No";
-	
 	  return React.createElement(
-	    "h2",
+	    'h2',
 	    null,
-	    setResponse
+	    props.answer
 	  );
 	};
 	
