@@ -6,7 +6,18 @@ has been randomly assigned. Built in React.
 
 ## Screenshots
 
-<img width="700" alt="screen shot 2016-10-24 at 07 54 16" src="https://cloud.githubusercontent.com/assets/17990363/19636228/ed94436c-99bf-11e6-9d6c-1d4ad4020031.png">
+Main Page:
+
+<img width="700" alt="screen shot 2016-10-24 at 20 41 25" src="https://cloud.githubusercontent.com/assets/17990363/19661155/84c24756-9a2a-11e6-9344-d44c27ccf86c.png">
+
+Choose a question and discard cards:
+
+<img width="700" alt="screen shot 2016-10-24 at 20 41 43" src="https://cloud.githubusercontent.com/assets/17990363/19661161/8ab5584c-9a2a-11e6-8168-9ba1433c5528.png">
+
+Make guess and check final answer:
+
+<img width="700" alt="screen shot 2016-10-24 at 20 42 05" src="https://cloud.githubusercontent.com/assets/17990363/19661165/8df01ad8-9a2a-11e6-8367-78f1f3d77eb2.png">
+
 
 
 ### To run app >>
