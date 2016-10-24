@@ -4,60 +4,42 @@
     "id": 0,
     "name": "Hugh Grant",
     "image": "./images/hugh_grant.jpg",
-    "facialHair": false,
-    "glasses": true,
-    "darkHair": true,
-    "hat": false
+    "question": [false, true, true, false]
   },  
 
   { 
     "id": 1,
     "name": "Hugh Lawrie",
     "image": "./images/hugh_lawrie.jpg",
-    "facialHair": true,
-    "glasses": true,
-    "darkHair": false,
-    "hat": false
+    "question": [true, true, false, false]
   },  
 
   { 
     "id": 2,
     "name": "Hugh Hefner",
     "image": "./images/hugh_hefner.jpg",
-    "facialHair": false,
-    "glasses": false,
-    "darkHair": false,
-    "hat": true
+    "question": [false, false, false, true]
   },  
 
   {
     "id": 3,
     "name": "Hugh Jackman",
     "image": "./images/hugh_jackman.jpg",
-    "facialHair": true,
-    "glasses": true,
-    "darkHair": true,
-    "hat": true
+    "question": [true, true, true, true]
   },
 
   { 
     "id": 4,
     "name": "Hugh Bonneville",
     "image": "./images/hugh_bonneville.jpg",
-    "facialHair": false,
-    "glasses": false,
-    "darkHair": false,
-    "hat": false
+    "question": [false, false, false, false]
   }, 
 
   { 
     "id": 5,
     "name": "Hugh Dennis",
     "image": "./images/hugh_dennis.jpg",
-    "facialHair": false,
-    "glasses": false,
-    "darkHair": false,
-    "hat": true
+    "question": [false, false, false, true]
   }
 
 ]

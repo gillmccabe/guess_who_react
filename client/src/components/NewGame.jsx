@@ -10,25 +10,25 @@ var NewGame = React.createClass({
   getInitialState: function(){
 
     var questions = [
+      "Does he have facial hair?",
       "Is he wearing glasses?",
       "Does he have dark hair?",
-      "Is he wearing a hat?",
-      "Does he have facial hair?"
+      "Is he wearing a hat?"
     ]
 
     return { 
-      correctHugh: null,
       questions: questions, 
+      correctHugh: null,
       selectedQuestion: null,
       questionAnswer: null,
-      guessAnswer: null,
-      guessId: null
+      guessId: null,
+      guessAnswer: null
     }
   },
 
   componentDidUpdate: function() {
     if (this.state.correctHugh === null) {
-    const randomHugh = this.props.hughs[Math.floor(Math.random() * this.props.hughs.length)];
+     var randomHugh = this.props.hughs[Math.floor(Math.random() * this.props.hughs.length)];
     this.setState({correctHugh: randomHugh})
     }
   },
@@ -36,17 +36,17 @@ var NewGame = React.createClass({
   setSelectedQuestion: function(index) {
       this.setState({ selectedClue: index }, function respondToQuestion() {        
         var index = this.state.selectedQuestion;
-        var response = this.state.questions[index];
+        var response = this.state.correctHugh.question[index];
         this.setState({questionAnswer: response});    
       }.bind(this)); 
   },
 
   checkGuessIsCorrect: function(guessId) {
     this.setState({guessId: guessId}, function respondToGuess(){
-      if (guessId === this.state.correctHugh.id) {
+      if (guessId == this.state.correctHugh.id) {
         this.setState({guessAnswer: "That's the correct answer. Well Done!"})
       } else {
-        this.setState({guessAnswer: "Oops wrong answer! Try Again..."})
+        this.setState({guessAnswer: "Oops - wrong answer! Try Again!"})
       }
     }.bind(this));
   },
@@ -60,7 +60,7 @@ var NewGame = React.createClass({
         <div className='all-dropdown-info'>
           <div className="questions-div">
             <h2 id='question-title'>Ask A Question</h2>
-            <QuestionSelector hughs={this.props.hughs} questions={this.state.questions} defaultValue={this.setSelectedQuestion}/>
+            <QuestionSelector hughs={this.props.hughs} questions={this.state.questions} selectedQuestion={this.setSelectedQuestion}/>
             <QuestionAnswer answer={this.state.questionAnswer}/>
           </div>
           <div className="guess-div">

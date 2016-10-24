@@ -19823,10 +19823,10 @@
 	
 	var React = __webpack_require__(1);
 	var HughList = __webpack_require__(162);
-	var QuestionSelector = __webpack_require__(164);
-	var QuestionAnswer = __webpack_require__(165);
-	var GuessSelector = __webpack_require__(166);
-	var GuessAnswer = __webpack_require__(167);
+	var QuestionSelector = __webpack_require__(165);
+	var QuestionAnswer = __webpack_require__(166);
+	var GuessSelector = __webpack_require__(167);
+	var GuessAnswer = __webpack_require__(168);
 	
 	var NewGame = React.createClass({
 	  displayName: 'NewGame',
@@ -19834,15 +19834,15 @@
 	
 	  getInitialState: function getInitialState() {
 	
-	    var questions = ["Is he wearing glasses?", "Does he have dark hair?", "Is he wearing a hat?", "Does he have facial hair?"];
+	    var questions = ["Does he have facial hair?", "Is he wearing glasses?", "Does he have dark hair?", "Is he wearing a hat?"];
 	
 	    return {
-	      correctHugh: null,
 	      questions: questions,
+	      correctHugh: null,
 	      selectedQuestion: null,
 	      questionAnswer: null,
-	      guessAnswer: null,
-	      guessId: null
+	      guessId: null,
+	      guessAnswer: null
 	    };
 	  },
 	
@@ -19856,17 +19856,17 @@
 	  setSelectedQuestion: function setSelectedQuestion(index) {
 	    this.setState({ selectedClue: index }, function respondToQuestion() {
 	      var index = this.state.selectedQuestion;
-	      var response = this.state.questions[index];
+	      var response = this.state.correctHugh.question[index];
 	      this.setState({ questionAnswer: response });
 	    }.bind(this));
 	  },
 	
 	  checkGuessIsCorrect: function checkGuessIsCorrect(guessId) {
 	    this.setState({ guessId: guessId }, function respondToGuess() {
-	      if (guessId === this.state.correctHugh.id) {
+	      if (guessId == this.state.correctHugh.id) {
 	        this.setState({ guessAnswer: "That's the correct answer. Well Done!" });
 	      } else {
-	        this.setState({ guessAnswer: "Oops wrong answer! Try Again..." });
+	        this.setState({ guessAnswer: "Oops - wrong answer! Try Again!" });
 	      }
 	    }.bind(this));
 	  },
@@ -19891,7 +19891,7 @@
 	            { id: 'question-title' },
 	            'Ask A Question'
 	          ),
-	          React.createElement(QuestionSelector, { hughs: this.props.hughs, questions: this.state.questions, defaultValue: this.setSelectedQuestion }),
+	          React.createElement(QuestionSelector, { hughs: this.props.hughs, questions: this.state.questions, selectedQuestion: this.setSelectedQuestion }),
 	          React.createElement(QuestionAnswer, { answer: this.state.questionAnswer })
 	        ),
 	        React.createElement(
@@ -19953,6 +19953,7 @@
 	'use strict';
 	
 	var React = __webpack_require__(1);
+	var classNames = __webpack_require__(164);
 	
 	var Hugh = React.createClass({
 	  displayName: 'Hugh',
@@ -19960,17 +19961,18 @@
 	
 	  getInitialState: function getInitialState() {
 	    return {
-	      selected: false
+	      discarded: false
 	    };
 	  },
 	
 	  handleClick: function handleClick() {
-	    var setSelected = !this.state.selected;
-	    this.setState({ selected: true });
+	    var setDiscarded = !this.state.discarded;
+	    this.setState({ discarded: setDiscarded });
 	  },
 	
 	  render: function render() {
-	    return React.createElement('img', { src: this.props.image, onClick: this.handleClick });
+	    var classes = classNames({ discarded: this.state.discarded });
+	    return React.createElement('img', { className: classes, src: this.props.image, onClick: this.handleClick });
 	  }
 	
 	});
@@ -19979,6 +19981,60 @@
 
 /***/ },
 /* 164 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
+	  Licensed under the MIT License (MIT), see
+	  http://jedwatson.github.io/classnames
+	*/
+	/* global define */
+	
+	(function () {
+		'use strict';
+	
+		var hasOwn = {}.hasOwnProperty;
+	
+		function classNames () {
+			var classes = [];
+	
+			for (var i = 0; i < arguments.length; i++) {
+				var arg = arguments[i];
+				if (!arg) continue;
+	
+				var argType = typeof arg;
+	
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
+				} else if (Array.isArray(arg)) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
+					for (var key in arg) {
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
+						}
+					}
+				}
+			}
+	
+			return classes.join(' ');
+		}
+	
+		if (typeof module !== 'undefined' && module.exports) {
+			module.exports = classNames;
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return classNames;
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else {
+			window.classNames = classNames;
+		}
+	}());
+
+
+/***/ },
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -20002,10 +20058,15 @@
 	
 	  handleQuestionChoice: function handleQuestionChoice(event) {
 	    var index = event.target.value;
-	    this.props.hughs[index];
+	    this.props.selectedQuestion(index);
 	  },
 	
 	  render: function render() {
+	
+	    if (!this.props.questions) {
+	      return;
+	    }
+	
 	    var options = this.generateQuestionsDropdown();
 	    return React.createElement(
 	      "select",
@@ -20024,28 +20085,32 @@
 	module.exports = QuestionSelector;
 
 /***/ },
-/* 165 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	var React = __webpack_require__(1);
 	
 	var QuestionAnswer = function QuestionAnswer(props) {
 	
 	  if (props.answer === null) {
-	    return React.createElement('p', null);
+	    return React.createElement("p", null);
 	  };
+	
+	  var setResponse = props.answer ? "Yes" : "No";
+	
 	  return React.createElement(
-	    'p',
+	    "h2",
 	    null,
-	    props.answer
+	    setResponse
 	  );
 	};
+	
 	module.exports = QuestionAnswer;
 
 /***/ },
-/* 166 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -20091,7 +20156,7 @@
 	module.exports = GuessSelector;
 
 /***/ },
-/* 167 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20103,8 +20168,9 @@
 	  if (props.response === null) {
 	    return React.createElement('p', null);
 	  };
+	
 	  return React.createElement(
-	    'p',
+	    'h2',
 	    null,
 	    props.response
 	  );

@@ -11,10 +11,15 @@ var QuestionSelector = React.createClass({
 
   handleQuestionChoice: function(event) {
     var index = event.target.value;
-    this.props.hughs[index];
+    this.props.selectedQuestion(index);
   },
 
   render: function(){
+
+    if(!this.props.questions){
+         return;
+       }
+
     var options = this.generateQuestionsDropdown();
     return (
       <select id="questions-dropdown" onChange={this.handleQuestionChoice}>
