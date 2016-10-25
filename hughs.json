@@ -4,42 +4,42 @@
     "id": 0,
     "name": "Hugh Grant",
     "image": "./images/hugh_grant.jpg",
-    "question": [false, true, true, false]
+    "question": ["yes", "yes", "yes", "no"]
   },  
 
   { 
     "id": 1,
     "name": "Hugh Lawrie",
     "image": "./images/hugh_lawrie.jpg",
-    "question": [true, true, false, false]
+    "question": ["yes", "yes", "no", "no"]
   },  
 
   { 
     "id": 2,
     "name": "Hugh Hefner",
     "image": "./images/hugh_hefner.jpg",
-    "question": [false, false, false, true]
+    "question": ["no", "no", "no", "yes"]
   },  
 
   {
     "id": 3,
     "name": "Hugh Jackman",
     "image": "./images/hugh_jackman.jpg",
-    "question": [true, true, true, true]
+    "question": ["yes", "yes", "yes", "yes"]
   },
 
   { 
     "id": 4,
     "name": "Hugh Bonneville",
     "image": "./images/hugh_bonneville.jpg",
-    "question": [false, false, false, false]
+    "question": ["no", "no", "no", "no"]
   }, 
 
   { 
     "id": 5,
     "name": "Hugh Dennis",
     "image": "./images/hugh_dennis.jpg",
-    "question": [false, false, false, true]
+    "question": ["no", "no", "no", "yes"]
   }
 
 ]

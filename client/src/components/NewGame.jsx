@@ -9,15 +9,13 @@ var NewGame = React.createClass({
 
   getInitialState: function(){
 
-    var questions = [
+    return { 
+      questions: [
       "Does he have facial hair?",
       "Is he wearing glasses?",
       "Does he have dark hair?",
       "Is he wearing a hat?"
-    ]
-
-    return { 
-      questions: questions, 
+      ], 
       correctHugh: null,
       selectedQuestion: null,
       questionAnswer: null,
