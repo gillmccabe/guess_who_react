@@ -5,7 +5,9 @@ var NewGame = require('./NewGame');
 var Main = React.createClass({
 
   getInitialState: function(){
-    return {hughs: []};
+    return {
+      hughs: []
+    }
   },
 
   componentDidMount: function() {

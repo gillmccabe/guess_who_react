@@ -19763,7 +19763,9 @@
 	
 	
 	  getInitialState: function getInitialState() {
-	    return { hughs: [] };
+	    return {
+	      hughs: []
+	    };
 	  },
 	
 	  componentDidMount: function componentDidMount() {
