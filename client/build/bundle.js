@@ -19834,10 +19834,8 @@
 	
 	  getInitialState: function getInitialState() {
 	
-	    var questions = ["Does he have facial hair?", "Is he wearing glasses?", "Does he have dark hair?", "Is he wearing a hat?"];
-	
 	    return {
-	      questions: questions,
+	      questions: ["Does he have facial hair?", "Is he wearing glasses?", "Does he have dark hair?", "Is he wearing a hat?"],
 	      correctHugh: null,
 	      selectedQuestion: null,
 	      questionAnswer: null,
@@ -19854,7 +19852,7 @@
 	  },
 	
 	  setSelectedQuestion: function setSelectedQuestion(index) {
-	    this.setState({ selectedClue: index }, function respondToQuestion() {
+	    this.setState({ selectedQuestion: index }, function respondToQuestion() {
 	      var index = this.state.selectedQuestion;
 	      var response = this.state.correctHugh.question[index];
 	      this.setState({ questionAnswer: response });
