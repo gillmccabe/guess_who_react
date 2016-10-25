@@ -19823,9 +19823,9 @@
 	
 	var React = __webpack_require__(1);
 	var HughList = __webpack_require__(162);
-	var QuestionSelector = __webpack_require__(165);
+	var QuestionSelect = __webpack_require__(170);
 	var QuestionAnswer = __webpack_require__(166);
-	var GuessSelector = __webpack_require__(167);
+	var GuessSelect = __webpack_require__(169);
 	var GuessAnswer = __webpack_require__(168);
 	
 	var NewGame = React.createClass({
@@ -19889,7 +19889,7 @@
 	            { id: 'question-title' },
 	            'Ask A Question'
 	          ),
-	          React.createElement(QuestionSelector, { hughs: this.props.hughs, questions: this.state.questions, selectedQuestion: this.setSelectedQuestion }),
+	          React.createElement(QuestionSelect, { hughs: this.props.hughs, questions: this.state.questions, selectedQuestion: this.setSelectedQuestion }),
 	          React.createElement(QuestionAnswer, { answer: this.state.questionAnswer })
 	        ),
 	        React.createElement(
@@ -19900,7 +19900,7 @@
 	            { id: 'guess-title' },
 	            'Take A Guess'
 	          ),
-	          React.createElement(GuessSelector, { hughs: this.props.hughs, makeGuess: this.checkGuessIsCorrect }),
+	          React.createElement(GuessSelect, { hughs: this.props.hughs, makeGuess: this.checkGuessIsCorrect }),
 	          React.createElement(GuessAnswer, { response: this.state.guessAnswer })
 	        )
 	      )
@@ -20032,15 +20032,104 @@
 
 
 /***/ },
-/* 165 */
+/* 165 */,
+/* 166 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	
+	var QuestionAnswer = function QuestionAnswer(props) {
+	
+	  return React.createElement(
+	    'h2',
+	    null,
+	    props.answer
+	  );
+	};
+	
+	module.exports = QuestionAnswer;
+
+/***/ },
+/* 167 */,
+/* 168 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	
+	var GuessAnswer = function GuessAnswer(props) {
+	
+	  if (props.response === null) {
+	    return React.createElement('p', null);
+	  };
+	
+	  return React.createElement(
+	    'h2',
+	    null,
+	    props.response
+	  );
+	};
+	module.exports = GuessAnswer;
+
+/***/ },
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	var React = __webpack_require__(1);
 	
-	var QuestionSelector = React.createClass({
-	  displayName: "QuestionSelector",
+	var GuessSelect = React.createClass({
+	  displayName: "GuessSelect",
+	
+	
+	  generateGuessDropdown: function generateGuessDropdown() {
+	    var options = this.props.hughs.map(function (hugh, index) {
+	      return React.createElement(
+	        "option",
+	        { key: index, value: hugh.id },
+	        hugh.name
+	      );
+	    });
+	    return options;
+	  },
+	
+	  handleGuess: function handleGuess(event, index) {
+	    var id = event.target.value;
+	    this.props.makeGuess(id);
+	  },
+	
+	  render: function render() {
+	    var options = this.generateGuessDropdown();
+	    return React.createElement(
+	      "select",
+	      { id: "guess-dropdown", onChange: this.handleGuess },
+	      React.createElement(
+	        "option",
+	        { selected: "true", disabled: "disabled" },
+	        "Choose a Hugh"
+	      ),
+	      options
+	    );
+	  }
+	
+	});
+	
+	module.exports = GuessSelect;
+
+/***/ },
+/* 170 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(1);
+	
+	var QuestionSelect = React.createClass({
+	  displayName: "QuestionSelect",
 	
 	
 	  generateQuestionsDropdown: function generateQuestionsDropdown() {
@@ -20080,94 +20169,7 @@
 	
 	});
 	
-	module.exports = QuestionSelector;
-
-/***/ },
-/* 166 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var React = __webpack_require__(1);
-	
-	var QuestionAnswer = function QuestionAnswer(props) {
-	
-	  return React.createElement(
-	    'h2',
-	    null,
-	    props.answer
-	  );
-	};
-	
-	module.exports = QuestionAnswer;
-
-/***/ },
-/* 167 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	var React = __webpack_require__(1);
-	
-	var GuessSelector = React.createClass({
-	  displayName: "GuessSelector",
-	
-	
-	  generateGuessDropdown: function generateGuessDropdown() {
-	    var options = this.props.hughs.map(function (hugh, index) {
-	      return React.createElement(
-	        "option",
-	        { key: index, value: hugh.id },
-	        hugh.name
-	      );
-	    });
-	    return options;
-	  },
-	
-	  handleGuess: function handleGuess(event, index) {
-	    var id = event.target.value;
-	    this.props.makeGuess(id);
-	  },
-	
-	  render: function render() {
-	    var options = this.generateGuessDropdown();
-	    return React.createElement(
-	      "select",
-	      { id: "guess-dropdown", onChange: this.handleGuess },
-	      React.createElement(
-	        "option",
-	        { selected: "true", disabled: "disabled" },
-	        "Choose a Hugh"
-	      ),
-	      options
-	    );
-	  }
-	
-	});
-	
-	module.exports = GuessSelector;
-
-/***/ },
-/* 168 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var React = __webpack_require__(1);
-	
-	var GuessAnswer = function GuessAnswer(props) {
-	
-	  if (props.response === null) {
-	    return React.createElement('p', null);
-	  };
-	
-	  return React.createElement(
-	    'h2',
-	    null,
-	    props.response
-	  );
-	};
-	module.exports = GuessAnswer;
+	module.exports = QuestionSelect;
 
 /***/ }
 /******/ ]);

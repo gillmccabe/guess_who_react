@@ -1,6 +1,6 @@
 var React = require('react');
 
-var GuessSelector = React.createClass({
+var GuessSelect = React.createClass({
 
   generateGuessDropdown: function() {
     var options = this.props.hughs.map(function(hugh, index){
@@ -26,4 +26,4 @@ var GuessSelector = React.createClass({
 
 })
 
-module.exports = GuessSelector;
+module.exports = GuessSelect;

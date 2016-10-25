@@ -1,6 +1,6 @@
 var React = require('react');
 
-var QuestionSelector = React.createClass({
+var QuestionSelect = React.createClass({
 
   generateQuestionsDropdown: function() {
     var options = this.props.questions.map(function(question, index){
@@ -33,4 +33,4 @@ var QuestionSelector = React.createClass({
 
 })
 
-module.exports = QuestionSelector;
+module.exports = QuestionSelect;

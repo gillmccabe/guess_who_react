@@ -1,8 +1,8 @@
 var React = require('react');
 var HughList = require('./HughList');
-var QuestionSelector = require('./QuestionSelector');
+var QuestionSelect = require('./QuestionSelect');
 var QuestionAnswer = require('./QuestionAnswer');
-var GuessSelector = require('./GuessSelector');
+var GuessSelect = require('./GuessSelect');
 var GuessAnswer = require('./GuessAnswer');
 
 var NewGame = React.createClass({
@@ -58,12 +58,12 @@ var NewGame = React.createClass({
         <div className='all-dropdown-info'>
           <div className="questions-div">
             <h2 id='question-title'>Ask A Question</h2>
-            <QuestionSelector hughs={this.props.hughs} questions={this.state.questions} selectedQuestion={this.setSelectedQuestion}/>
+            <QuestionSelect hughs={this.props.hughs} questions={this.state.questions} selectedQuestion={this.setSelectedQuestion}/>
             <QuestionAnswer answer={this.state.questionAnswer}/>
           </div>
           <div className="guess-div">
             <h2 id='guess-title'>Take A Guess</h2>
-            <GuessSelector hughs={this.props.hughs} makeGuess={this.checkGuessIsCorrect} />
+            <GuessSelect hughs={this.props.hughs} makeGuess={this.checkGuessIsCorrect} />
             <GuessAnswer response={this.state.guessAnswer}/>
           </div>
         </div>
