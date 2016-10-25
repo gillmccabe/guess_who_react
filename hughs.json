@@ -9,7 +9,7 @@
 
   { 
     "id": 1,
-    "name": "Hugh Lawrie",
+    "name": "Hugh Laurie",
     "image": "./images/hugh_lawrie.jpg",
     "question": ["Yes", "Yes", "No", "No"]
   },  
