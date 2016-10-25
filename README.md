@@ -8,15 +8,15 @@ has been randomly assigned. Built in React.
 
 Main Page:
 
-<img width="700" alt="screen shot 2016-10-24 at 20 41 25" src="https://cloud.githubusercontent.com/assets/17990363/19661155/84c24756-9a2a-11e6-9344-d44c27ccf86c.png">
+<img width="700" alt="screen shot 2016-10-25 at 21 52 35" src="https://cloud.githubusercontent.com/assets/17990363/19703908/8f2e6c78-9afd-11e6-8b7c-cebcfb597f4f.png">
 
 Choose a question and discard cards:
 
-<img width="700" alt="screen shot 2016-10-24 at 20 41 43" src="https://cloud.githubusercontent.com/assets/17990363/19661161/8ab5584c-9a2a-11e6-8168-9ba1433c5528.png">
+<img width="700" alt="screen shot 2016-10-25 at 21 52 46" src="https://cloud.githubusercontent.com/assets/17990363/19703918/99300b3c-9afd-11e6-8593-17c035aaa4b6.png">
 
 Make guess and check final answer:
 
-<img width="700" alt="screen shot 2016-10-24 at 20 42 05" src="https://cloud.githubusercontent.com/assets/17990363/19661165/8df01ad8-9a2a-11e6-8367-78f1f3d77eb2.png">
+<img width="700" alt="screen shot 2016-10-25 at 21 52 29" src="https://cloud.githubusercontent.com/assets/17990363/19703914/94d77f98-9afd-11e6-9400-45d868218a66.png">
 
 
 
